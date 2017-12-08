@@ -42,7 +42,7 @@ switch (action) {
 // }
 
 function spotifyThis(value){
-  if(value === null){
+  if(value == null){
     value = 'The Sign';
   }
   request('https://api.spotify.com/v1/search?q=' + value + '&type=track', function(error, response, body) {

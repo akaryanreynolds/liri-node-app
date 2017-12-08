@@ -1,4 +1,4 @@
-console.log('this is loaded');
+console.log('keys page loaded');
 
 var apiKeys = {
 

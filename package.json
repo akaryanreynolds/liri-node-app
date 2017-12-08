@@ -1,0 +1,27 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "Liri HW",
+  "main": "keys.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akaryanreynolds/liri-node-app.git"
+  },
+  "keywords": [
+    "Hw",
+    "for",
+    "Node"
+  ],
+  "author": "Ryan Reynolds",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akaryanreynolds/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/akaryanreynolds/liri-node-app#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7"
+  }
+}

@@ -54,7 +54,7 @@ function spotifyThis(value){
         console.log('Preview Link: ' + jsonBody.tracks.items[0].preview_url);
         console.log('Album: ' + jsonBody.tracks.items[0].album.name);
         console.log(' ');
-        fs.appendFile('terminal.log', ('===== Tweet =====\r\n' + Date() +'\r\n \r\nTERMINAL COMMANDS:\r\n$: ' + process.argv + '\r\n \r\nDATA OUTPUT:\r\n' + 'Artist: ' + jsonBody.tracks.items[0].artists[0].name + '\r\nSong: ' + jsonBody.tracks.items[0].name + '\r\nPreview Link: ' + jsonBody.tracks.items[0].preview_url + '\r\nAlbum: ' + jsonBody.tracks.items[0].album.name + '\r\n===== END =====\r\n \r\n'), function(err) {
+        fs.appendFile('terminal.log', ('===== Song =====\r\n' + Date() +'\r\n \r\nTERMINAL COMMANDS:\r\n$: ' + process.argv + '\r\n \r\nDATA OUTPUT:\r\n' + 'Artist: ' + jsonBody.tracks.items[0].artists[0].name + '\r\nSong: ' + jsonBody.tracks.items[0].name + '\r\nPreview Link: ' + jsonBody.tracks.items[0].preview_url + '\r\nAlbum: ' + jsonBody.tracks.items[0].album.name + '\r\n===== END =====\r\n \r\n'), function(err) {
             if (err) throw err;
         });
       }

@@ -1,6 +1,7 @@
 var keys = require("./keys.js");
 var request = require("request");
 var fs = require("fs");
+var Spotify = require('node-spotify-api');
 
 var action = process.argv[2];
 var value = process.argv[3];
@@ -45,6 +46,25 @@ function spotifyThis(value){
   if(value == null){
     value = 'The Sign';
   }
+  var spotify = new Spotify({
+    id: keys.spotifyKeys.client_key,
+    secret: keys.spotifyKeys.client_secret
+  });
+   
+  spotify.search({ type: 'track', query: value }, function(err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+    
+    //jsonBody = JSON.stringify(data);
+    console.log(data.tracks.items);
+    for(var songs in data.tracks.items){
+      console.log(data.tracks.items[songs].album.name);
+    }
+    //console.log(jsonBody); 
+  });
+  
+  /*
   request('https://api.spotify.com/v1/search?q=' + value + '&type=track', function(error, response, body) {
     if (!error && response.statusCode == 200) {
         jsonBody = JSON.parse(body);
@@ -58,5 +78,5 @@ function spotifyThis(value){
             if (err) throw err;
         });
       }
-    });
+    });*/
   }

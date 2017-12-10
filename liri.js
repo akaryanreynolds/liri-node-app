@@ -1,26 +1,27 @@
 var keys = require("./keys.js");
 var request = require("request");
 var fs = require("fs");
+var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 
 var action = process.argv[2];
 var value = process.argv[3];
 
-// var client = new twitter({
-//     consumer_key: keys.twitterKeys.consumer_key,
-//     consumer_secret: keys.twitterKeys.consumer_secret,
-//     access_token: keys.twitterKeys.access_token,
-//     access_token_secret: keys.twitterKeys.access_token_secret
-//   })
+var client = new Twitter({
+    consumer_key: keys.twitterKeys.consumer_key,
+    consumer_secret: keys.twitterKeys.consumer_secret,
+    access_token_key: keys.twitterKeys.access_token_key,
+    access_token_secret: keys.twitterKeys.access_token_secret
+  });
 
-// var params = {
-//     screen_name: 'akaryanreynolds',
-//     count: 10
-// }
+var params = {
+    screen_name: 'akaRyanReynolds',
+    count: 10
+};
 
 // From class activity 15 converted to work with hw
 switch (action) {
-  case "tweets":
+  case "myTweets":
     myTweets();
     break;
 
@@ -37,10 +38,19 @@ switch (action) {
     break;
 }
 
-// FUNCTIONS
+// FUNCTIONS-------------------------------------
 
 // function for myTweets()
+function myTweets(){
 
+  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    // if (error) throw error
+    console.log(tweets);
+    if (!error) {
+      console.log(tweets);
+    }
+  })
+};
 // End Twitter
 
 
@@ -77,7 +87,6 @@ function spotifyThis(value) {
 
 
 // function for omdbThis()
-
 function omdbThis(value) {
   if (value == undefined) {
     value = 'Mr. Nobody';
@@ -103,7 +112,8 @@ function omdbThis(value) {
     console.log('___________________________________________')
     console.log(' ');
     // console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
-
   })
 }
 // End OMDB
+
+// End FUNCTIONS---------------------

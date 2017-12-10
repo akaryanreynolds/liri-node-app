@@ -5,7 +5,7 @@ var apiKeys = {
 twitterKeys: {
   consumer_key: 'mBwKkvNStv0rfvu47mXc0ZCaV',
   consumer_secret: '1gSmvS9IFARXNuYho6c3y7VSeJZ1YevB3JWW4cqoTpcjsQfoeV',
-  access_token: '230817732-pxLjmAkWZEK2konColml6aCrbEm1oacGKaRmrLc9',
+  access_token_key: '230817732-pxLjmAkWZEK2konColml6aCrbEm1oacGKaRmrLc9',
   access_token_secret: 	'5X2zYDqggRXdZlwEIJKSvB9fiMC3GD6P3KwqQ42xDdOjj',
 },
 

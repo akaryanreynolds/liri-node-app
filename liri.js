@@ -20,52 +20,84 @@ var value = process.argv[3];
 
 // From class activity 15 converted to work with hw
 switch (action) {
-    case "my-tweets":
-      myTweets();
-      break;
-  
-    case "spotify":
-      spotifyThis(value);
-      break;
-  
-    case "movie-this":
-      omdbThis(value);
-      break;
-  
-    case "do-what-it-says":
-      doIt();
-      break;
-  }
+  case "tweets":
+    myTweets();
+    break;
 
-// // functions
-// function myTweets(){
-    
-// }
+  case "spotify":
+    spotifyThis(value);
+    break;
 
-function spotifyThis(value){
-  if(value == null){
+  case "omdb":
+    omdbThis(value);
+    break;
+
+  case "do-what-it-says":
+    doIt();
+    break;
+}
+
+// FUNCTIONS
+
+// function for myTweets()
+
+// End Twitter
+
+
+// function for spotifyThis()
+function spotifyThis(value) {
+  if (value == null) {
     value = 'The Sign';
   }
-  console.log(value + "******")
+  console.log('*******You SEARCHED:----' + value + "----******")
   var spotify = new Spotify({
     id: keys.spotifyKeys.client_key,
     secret: keys.spotifyKeys.client_secret
   });
-   
-  spotify.search({ type: 'track', query: value, limit: 1}, function(err, data) {
+
+  spotify.search({ type: 'track', query: value, limit: 1 }, function (err, data) {
     if (err) {
-      return console.log('Error occurred: ' + err);
+      return console.log('Error occurred via your SEARCH TERM: ' + err);
     }
-    
-    jsonBody = JSON.stringify(data.tracks);
-    console.log('**********************')
-    console.log(jsonBody);
-    console.log('*******************')
-    // console.log(data.tracks.items);
-    // for(var songs in data.tracks.items){
-    //   console.log(data.tracks.items[songs].album.name);
-    // }
-    //console.log(jsonBody); 
+
+    // jsonBody = JSON.stringify(data.tracks.items[0]);
+    // console.log(jsonBody);
+    // Here are the outputs for the Soptify search
+    console.log()
+    console.log('____________Here is your Data______________')
+    console.log('Artist ' + data.tracks.items[0].album.artists[0].name);
+    console.log('Song: ' + data.tracks.items[0].name);
+    console.log('Preview Link: ' + data.tracks.items[0].preview_url);
+    console.log('Album: ' + data.tracks.items[0].album.name);
+    console.log('___________________________________________')
+    console.log()
   });
-  
-  }
+}
+// End Spotify
+
+
+// function for omdbThis()
+
+function omdbThis(value) {
+  request("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
+    console.log('*******You SEARCHED:----' + value + "----******")
+
+    var jsonBody = JSON.parse(body)
+    if (!error && response.statusCode === 200) {
+      console.log(' ');
+      console.log('____________Here is your Data______________')
+      console.log('Title: ' + jsonBody.Title);
+      console.log('Year: ' + jsonBody.Year);
+      console.log('IMDb Rating: ' + jsonBody.imdbRating);
+      console.log('Rotten Tomatoes Rating: ' + jsonBody.tomatoRating);
+      console.log('Country: ' + jsonBody.Country);
+      console.log('Language: ' + jsonBody.Language);
+      console.log('Plot: ' + jsonBody.Plot);
+      console.log('Actors: ' + jsonBody.Actors);
+      console.log('___________________________________________')
+      console.log(' ');
+      // console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+    }
+  })
+}
+// End OMDB

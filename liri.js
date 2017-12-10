@@ -46,7 +46,7 @@ switch (action) {
 
 // function for spotifyThis()
 function spotifyThis(value) {
-  if (value == null) {
+  if (value == undefined) {
     value = 'The Sign';
   }
   console.log('*******You SEARCHED:----' + value + "----******")
@@ -79,25 +79,31 @@ function spotifyThis(value) {
 // function for omdbThis()
 
 function omdbThis(value) {
-  request("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
+  if (value == undefined) {
+    value = 'Mr. Nobody';
+  }
+  // Used code from HW 17 OMDB Request
+  request("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy", function (err, response, body) {
     console.log('*******You SEARCHED:----' + value + "----******")
 
     var jsonBody = JSON.parse(body)
-    if (!error && response.statusCode === 200) {
-      console.log(' ');
-      console.log('____________Here is your Data______________')
-      console.log('Title: ' + jsonBody.Title);
-      console.log('Year: ' + jsonBody.Year);
-      console.log('IMDb Rating: ' + jsonBody.imdbRating);
-      console.log('Rotten Tomatoes Rating: ' + jsonBody.tomatoRating);
-      console.log('Country: ' + jsonBody.Country);
-      console.log('Language: ' + jsonBody.Language);
-      console.log('Plot: ' + jsonBody.Plot);
-      console.log('Actors: ' + jsonBody.Actors);
-      console.log('___________________________________________')
-      console.log(' ');
-      // console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+    if (err) {
+      return console.log('Error occurred via your SEARCH TERM: ' + err);
     }
+    console.log(' ');
+    console.log('____________Here is your Data______________')
+    console.log('Title: ' + jsonBody.Title);
+    console.log('Year: ' + jsonBody.Year);
+    console.log('IMDb Rating: ' + jsonBody.imdbRating);
+    console.log('Rotten Tomatoes Rating: ' + jsonBody.tomatoRating);
+    console.log('Country: ' + jsonBody.Country);
+    console.log('Language: ' + jsonBody.Language);
+    console.log('Plot: ' + jsonBody.Plot);
+    console.log('Actors: ' + jsonBody.Actors);
+    console.log('___________________________________________')
+    console.log(' ');
+    // console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+
   })
 }
 // End OMDB

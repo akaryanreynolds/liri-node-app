@@ -24,7 +24,7 @@ switch (action) {
       myTweets();
       break;
   
-    case "spotify-this-song":
+    case "spotify":
       spotifyThis(value);
       break;
   
@@ -46,37 +46,26 @@ function spotifyThis(value){
   if(value == null){
     value = 'The Sign';
   }
+  console.log(value + "******")
   var spotify = new Spotify({
     id: keys.spotifyKeys.client_key,
     secret: keys.spotifyKeys.client_secret
   });
    
-  spotify.search({ type: 'track', query: value }, function(err, data) {
+  spotify.search({ type: 'track', query: value, limit: 1}, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
     
-    //jsonBody = JSON.stringify(data);
-    console.log(data.tracks.items);
-    for(var songs in data.tracks.items){
-      console.log(data.tracks.items[songs].album.name);
-    }
+    jsonBody = JSON.stringify(data.tracks);
+    console.log('**********************')
+    console.log(jsonBody);
+    console.log('*******************')
+    // console.log(data.tracks.items);
+    // for(var songs in data.tracks.items){
+    //   console.log(data.tracks.items[songs].album.name);
+    // }
     //console.log(jsonBody); 
   });
   
-  /*
-  request('https://api.spotify.com/v1/search?q=' + value + '&type=track', function(error, response, body) {
-    if (!error && response.statusCode == 200) {
-        jsonBody = JSON.parse(body);
-        console.log(' ');
-        console.log('Artist: ' + jsonBody.tracks.items[0].artists[0].name);
-        console.log('Song: ' + jsonBody.tracks.items[0].name);
-        console.log('Preview Link: ' + jsonBody.tracks.items[0].preview_url);
-        console.log('Album: ' + jsonBody.tracks.items[0].album.name);
-        console.log(' ');
-        fs.appendFile('terminal.log', ('===== Song =====\r\n' + Date() +'\r\n \r\nTERMINAL COMMANDS:\r\n$: ' + process.argv + '\r\n \r\nDATA OUTPUT:\r\n' + 'Artist: ' + jsonBody.tracks.items[0].artists[0].name + '\r\nSong: ' + jsonBody.tracks.items[0].name + '\r\nPreview Link: ' + jsonBody.tracks.items[0].preview_url + '\r\nAlbum: ' + jsonBody.tracks.items[0].album.name + '\r\n===== END =====\r\n \r\n'), function(err) {
-            if (err) throw err;
-        });
-      }
-    });*/
   }

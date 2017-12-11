@@ -1,22 +1,22 @@
 var keys = require("./keys.js");
 var request = require("request");
-var fs = require("fs");
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
+var fs = require("fs");
 
 var action = process.argv[2];
 var value = process.argv[3];
 
 var client = new Twitter({
-    consumer_key: keys.twitterKeys.consumer_key,
-    consumer_secret: keys.twitterKeys.consumer_secret,
-    access_token_key: keys.twitterKeys.access_token_key,
-    access_token_secret: keys.twitterKeys.access_token_secret
-  });
+  consumer_key: keys.twitterKeys.consumer_key,
+  consumer_secret: keys.twitterKeys.consumer_secret,
+  access_token_key: keys.twitterKeys.access_token_key,
+  access_token_secret: keys.twitterKeys.access_token_secret
+});
 
 var params = {
-    screen_name: 'akaRyanReynolds',
-    count: 10
+  screen_name: 'akaRyanReynolds',
+  count: 20
 };
 
 // From class activity 15 converted to work with hw
@@ -33,21 +33,29 @@ switch (action) {
     omdbThis(value);
     break;
 
-  case "do-what-it-says":
-    doIt();
+  case "doAny":
+    doAny();
     break;
 }
 
 // FUNCTIONS-------------------------------------
 
 // function for myTweets()
-function myTweets(){
+function myTweets() {
 
-  client.get('statuses/user_timeline', params, function(error, tweets, response) {
-    // if (error) throw error
-    console.log(tweets);
-    if (!error) {
-      console.log(tweets);
+  client.get('statuses/user_timeline', params, function (error, tweets, response) {
+    if (error) throw errors;
+    // console.log(tweets)
+    for (i = 0; i < tweets.length; i++) {
+      var number = i + 1; {
+        console.log('');
+        console.log('______________Here is your data___________________')
+        console.log('Last 20 Tweets:')
+        console.log('Number ' + [i + 1] + ' of 20.' + '\n' + tweets[i].text);
+        console.log('Created on: ' + tweets[i].created_at);
+        console.log('________________________________________________')
+        console.log(' ');
+      }
     }
   })
 };
@@ -116,4 +124,16 @@ function omdbThis(value) {
 }
 // End OMDB
 
-// End FUNCTIONS---------------------
+//funtion for doAny
+function doAny() {
+  fs.readFile("random.txt", "utf8", function (error, data) {
+
+    if (error) {
+      return console.log(error);
+    }
+
+    console.log(data);
+    var dataArr = data.split(",");
+    console.log(dataArr);
+  })
+  };

@@ -20,6 +20,8 @@ var params = {
 };
 
 // From class activity 15 converted to work with hw
+
+function runSwitch(){
 switch (action) {
   case "myTweets":
     myTweets();
@@ -37,6 +39,7 @@ switch (action) {
     doAny();
     break;
 }
+};
 
 // FUNCTIONS-------------------------------------
 
@@ -127,7 +130,7 @@ function omdbThis(value) {
 //funtion for doAny
 function doAny() {
   fs.readFile("random.txt", "utf8", function (error, data) {
-
+    
     if (error) {
       return console.log(error);
     }
@@ -135,5 +138,11 @@ function doAny() {
     console.log(data);
     var dataArr = data.split(",");
     console.log(dataArr);
+    action = dataArr[0];
+    value = dataArr[1];
+    console.log(action);
+    console.log(value);
+    runSwitch();
   })
   };
+  runSwitch();
